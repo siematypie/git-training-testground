@@ -5,7 +5,7 @@ var developMock = CommandLine.Execute("git branch develop"); //try to create dev
 var masterMock = CommandLine.Execute("git branch master"); //try to create develop branch, otherwise flow init fails
 
 
-var flowResult = CommandLine.Execute("git flow init -f -d && git config gitflow.branch.master acceptance &&  git config gitflow.branch.develop development", "Initializing Git Flow...");
+var flowResult = CommandLine.Execute("git flow init -f -d && git config gitflow.branch.master acceptance &&  git config gitflow.branch.develop development && git config --add gitflow.multi-hotfix true", "Initializing Git Flow...");
 if (developMock.IsSuccess) { // if branch was created by the script, remove it
     CommandLine.Execute("git branch -d develop");
 }

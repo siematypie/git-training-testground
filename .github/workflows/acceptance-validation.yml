@@ -19,4 +19,6 @@ jobs:
           ! startsWith(github.event.pull_request.head.ref, 'hotfix/') && 
           github.event.pull_request.head.ref != 'development' && 
           github.event.pull_request.head.ref != 'production'
-        run: echo "::set-failed::You can only merge branches with hotfix prefix, development or production to acceptance"
+        run: |
+          echo "::set-error::You can only merge branches with hotfix prefix, development or production to acceptance"
+          exit 1

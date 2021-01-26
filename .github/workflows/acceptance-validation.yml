@@ -35,7 +35,7 @@ jobs:
           exit 1
       - name: branch_check_production
         if: |
-          github.event.pull_request.base.ref == 'development' &&
+          github.event.pull_request.base.ref == 'production' &&
           github.event.pull_request.head.ref != 'acceptance'
         run: |
           echo "::error::Only following branches can be merged to production: acceptance"

@@ -4,8 +4,7 @@ name: validate-pr-acceptance
 
 # Controls when the action will run. 
 on:
-  pull_request:
-    branches: [ acceptance ]
+  pull_request
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -16,9 +15,10 @@ jobs:
     steps:
       - name: branch_chack
         if: | 
+          github.event.pull_request.base.ref == 'acceptance' &&
           ! startsWith(github.event.pull_request.head.ref, 'hotfix/') && 
           github.event.pull_request.head.ref != 'development' && 
           github.event.pull_request.head.ref != 'production'
         run: |
-          echo "::set-error::You can only merge branches with hotfix prefix, development or production to acceptance"
+          echo "::error::You can only merge branches with hotfix prefix, development or production to acceptance"
           exit 1

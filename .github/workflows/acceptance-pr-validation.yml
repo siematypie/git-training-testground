@@ -3,7 +3,6 @@ name: validate-pr-acceptance
 
 on:
   pull_request_target:
-    branches: acceptance
     types: [ opened, edited, reopened, synchronized ]
 
 jobs:
@@ -20,4 +19,24 @@ jobs:
         run: |
           echo "::error::Only following branches can be merged to acceptance: production, development, hotfix/*, chore-acc/*"
           exit 1
+      - name: check-dev-pr
+        if: | 
+          github.event.pull_request.base.ref == 'development' &&
+          ! startsWith(github.event.pull_request.head.ref, 'feature/') && 
+          ! startsWith(github.event.pull_request.head.ref, 'mergefix/') && 
+          ! startsWith(github.event.pull_request.head.ref, 'chore-dev/') && 
+          github.event.pull_request.head.ref != 'acceptance' && 
+          github.event.pull_request.head.ref != 'production'
+        run: |
+          echo "::error::Only following branches can be merged to development: production, acceptance, feature/*, mergefix/*, chore-dev/*"
+          exit 1
+      - name: check-prod-pr
+        if: |
+            github.event.pull_request.base.ref == 'production' &&
+            github.event.pull_request.head.ref != 'acceptance' &&
+            ! startsWith(github.event.pull_request.head.ref, 'chore-prod/')
+        run: |
+            echo "::error::Only following branches can be merged to production: acceptance, chore-prod/*"
+            exit 1
+
 

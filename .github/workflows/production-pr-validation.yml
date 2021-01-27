@@ -14,7 +14,8 @@ jobs:
       - name: check-prod-pr
         if: |
             github.event.pull_request.base.ref == 'production' &&
-            github.event.pull_request.head.ref != 'acceptance'
+            github.event.pull_request.head.ref != 'acceptance' &&
+            ! startsWith(github.event.pull_request.head.ref, 'chore-prod/')
         run: |
             echo "::error::Only following branches can be merged to production: acceptance"
             exit 1

@@ -1,5 +1,5 @@
 
-name: validate-pr-acceptance
+name: validate-pr-prod
 
 on:
   pull_request_target:

@@ -1,13 +1,11 @@
 
 name: validate-pr-acceptance
 
-# Controls when the action will run. 
 on:
   pull_request_target:
     branches: production
     types: [ opened, edited, reopened, synchronized ]
 jobs:
-  # This workflow contains a single job called "build"
   branch-check:
     runs-on: ubuntu-latest
     steps:

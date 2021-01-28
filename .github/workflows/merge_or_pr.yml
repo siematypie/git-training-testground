@@ -1,7 +1,7 @@
 name: Merge hotfix or create pr # Displayed on Github Actions page, if ommited, defaults to the file name
 
 on:
-  pull_request:   #Event on which workflow will run, in this case pull request
+  pull_request_target:   #Event on which workflow will run, in this case pull request
     types: [ closed ] #Additional specificetion for the event, in this case it will run when pull request closes
 
 jobs: #workflow can be running multiple jobs - they will run paraller to each other

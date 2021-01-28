@@ -25,7 +25,7 @@ jobs: #workflow can be running multiple jobs - they will run paraller to each ot
             pr_asignee: ${{ github.event.pull_request.user.login }}
             repo_token: ${{ secrets.ADMIN_TOKEN }} 
         - name: print-output #second step, runs directly in bash
-          run: echo "PR created ${{ steps.merge-or-pr.outputs.PR_CREATED  }} ${{ steps.merge-or-pr.outputs.PR_NUMBER }} ${{ steps.merge-or-pr.outputs.PR_URL }}" #prints outputs of the job with id merge-or-pr
+          run: echo "PRRRRRRRRRRRRR created ${{ steps.merge-or-pr.outputs.PR_CREATED  }} ${{ steps.merge-or-pr.outputs.PR_NUMBER }} ${{ steps.merge-or-pr.outputs.PR_URL }}" #prints outputs of the job with id merge-or-pr
         
         - uses: mshick/add-pr-comment@v1
           if: steps.merge-or-pr.outputs.PR_CREATED == 'false'
